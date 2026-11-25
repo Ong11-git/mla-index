@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happiness Index</title>
+<style>
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; padding: 16px; background: #eee; font-family: Arial, sans-serif; color: #3d5a80; }
+  .page { max-width: 800px; margin: auto; background: #fff; padding: 32px; }
+  header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; }
+  h1, h2 { display: inline-block; margin: 0; background: #52866c; color: #fff; padding: 6px 14px; border-radius: 8px; }
+  h2 { margin: 24px 0 8px; }
+  .info { color: #b0715f; font-weight: bold; font-size: 20px; line-height: 1.6; }
+  .gauge { width: 240px; text-align: center; margin: auto 0; }
+  .gauge svg { width: 100%; display: block; }
+  .labels { display: flex; justify-content: space-between; font-weight: bold; }
+  .poor { color: #b5473a; }
+  .good { color: #3f8f58; }
+  .overall { letter-spacing: 4px; font-weight: bold; margin-top: 16px; }
+  hr { border: 0; height: 3px; background: #c7826f; margin: 24px 0 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; }
+  .row { display: grid; grid-template-columns: 1fr 120px 40px; align-items: center; gap: 8px; margin: 12px 0; font-weight: bold; font-size: 14px; }
+  .single .row { max-width: 380px; }
+  .bar { height: 24px; background: #52866c; border-radius: 12px; overflow: hidden; }
+  .bar div { height: 100%; background: #ee9a7e; border-radius: 12px; }
+  @media (max-width: 650px) {
+    .page { padding: 18px; }
+    .grid { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr 100px 40px; }
+  }
+  /* Realistic bar: sunken track, glossy fill, moving shine */
+  .bar { box-shadow: inset 0 3px 6px rgba(0,0,0,.35); }
+  .bar div { position: relative; overflow: hidden;
+    background: linear-gradient(#ffc2ad, #ee9a7e 45%, #d9775a);
+    box-shadow: 2px 0 5px rgba(0,0,0,.25); }
+  .bar div::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.6) 50%, transparent 70%);
+    transform: translateX(-100%); animation: shine 2.8s ease-in-out infinite; }
+  @keyframes shine { 60%, 100% { transform: translateX(100%); } }
+  @media print { .bar div::after { display: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <h1>Happiness Index</h1>
+      <p class="info">Constituency: ABC<br>MLA Name: XYZ</p>
+    </div>
+    <div class="gauge">
+      <svg viewBox="0 0 200 110" role="img" aria-label="Overall score 85 percent">
+        <path d="M100 100 L0 100 A100 100 0 0 1 19.1 41.2Z" fill="#d9534f"/>
+        <path d="M100 100 L19.1 41.2 A100 100 0 0 1 69.1 4.9Z" fill="#e8833a"/>
+        <path d="M100 100 L69.1 4.9 A100 100 0 0 1 130.9 4.9Z" fill="#f2d33c"/>
+        <path d="M100 100 L130.9 4.9 A100 100 0 0 1 180.9 41.2Z" fill="#9bc45a"/>
+        <path d="M100 100 L180.9 41.2 A100 100 0 0 1 200 100Z" fill="#4caf6a"/>
+        <path d="M65 100 A35 35 0 0 1 135 100Z" fill="#fff"/>
+        <!-- Needle angle = score x 1.8; the script below animates it -->
+        <polygon points="40,100 100,93 100,107" fill="#34495e" transform="rotate(153 100 100)"/>
+        <circle cx="100" cy="100" r="8" fill="#34495e"/>
+      </svg>
+      <div class="labels"><span class="poor">POOR</span><span>85%</span><span class="good">EXCELLENT</span></div>
+      <div class="overall">Overall score</div>
+    </div>
+  </header>
+
+  <hr>
+
+  <section class="single">
+    <h2>Availability and Accessibility</h2>
+    <div class="row"><span>Availability</span><div class="bar"><div style="width:91%"></div></div><span>91%</span></div>
+    <div class="row"><span>Accessibility</span><div class="bar"><div style="width:77%"></div></div><span>77%</span></div>
+    <div class="row"><span>Approachability</span><div class="bar"><div style="width:84%"></div></div><span>84%</span></div>
+  </section>
+
+  <section>
+    <h2>Development Work</h2>
+    <div class="grid">
+      <div>
+        <div class="row"><span>Infrastructure Development</span><div class="bar"><div style="width:91%"></div></div><span>91%</span></div>
+        <div class="row"><span>Healthcare</span><div class="bar"><div style="width:77%"></div></div><span>77%</span></div>
+        <div class="row"><span>Education</span><div class="bar"><div style="width:84%"></div></div><span>84%</span></div>
+      </div>
+      <div>
+        <div class="row"><span>Employment and Economic Development</span><div class="bar"><div style="width:91%"></div></div><span>91%</span></div>
+        <div class="row"><span>Environmental and Social Initiatives</span><div class="bar"><div style="width:77%"></div></div><span>77%</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="single">
+    <h2>Social Engagement and Activity</h2>
+    <div class="row"><span>Community Involvement</span><div class="bar"><div style="width:91%"></div></div><span>91%</span></div>
+    <div class="row"><span>Social Media Engagement</span><div class="bar"><div style="width:77%"></div></div><span>77%</span></div>
+    <div class="row"><span>Social Welfare and Awareness Programs</span><div class="bar"><div style="width:84%"></div></div><span>84%</span></div>
+  </section>
+
+</div>
+<script>
+  // Runs "draw" from 0 to 1 over the given time
+  function animate(duration, draw) {
+    let start;
+    requestAnimationFrame(function step(now) {
+      start ??= now;
+      const t = Math.min((now - start) / duration, 1);
+      draw(t);
+      if (t < 1) requestAnimationFrame(step);
+    });
+  }
+
+  // Bars fill and numbers count up when they scroll into view
+  const observer = new IntersectionObserver(entries => {
+    entries.filter(e => e.isIntersecting).forEach((entry, i) => {
+      const row = entry.target;
+      observer.unobserve(row);
+      const fill = row.querySelector('.bar div');
+      const text = row.lastElementChild;
+      const target = Number(row.dataset.value);
+      setTimeout(() => animate(1600, t => {
+        const value = target * (1 - Math.pow(1 - t, 3)); // fast start, soft stop
+        fill.style.width = value + '%';
+        text.textContent = Math.round(value) + '%';
+      }), i * 150); // one after another
+    });
+  }, { threshold: 0.8 });
+
+  document.querySelectorAll('.row').forEach(row => {
+    row.dataset.value = parseInt(row.lastElementChild.textContent);
+    row.querySelector('.bar div').style.width = '0%';
+    row.lastElementChild.textContent = '0%';
+    observer.observe(row);
+  });
+
+  // Needle swings, overshoots slightly, then settles like a real meter
+  const needle = document.querySelector('.gauge polygon');
+  const scoreText = document.querySelector('.labels span:nth-child(2)');
+  const score = parseInt(scoreText.textContent);
+  animate(2400, t => {
+    const swing = t === 1 ? 1 : 1 - Math.exp(-6 * t) * Math.cos(11 * t);
+    needle.setAttribute('transform', `rotate(${score * 1.8 * swing} 100 100)`);
+    scoreText.textContent = Math.round(score * (1 - Math.pow(1 - t, 3))) + '%';
+  });
+</script>
+</body>
+</html>
